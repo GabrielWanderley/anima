@@ -9,10 +9,10 @@ export function AnimeItem(){
     const [anime, setAnime] = useState({})
     const [characters, setCharacter] = useState([])
     const [showMore, setShowmore] = useState(false)
-    const [showAll, setShowAll] = useState(false);
     const [showAllp, setShowAllp] = useState(false);
     const [revio, setReview] = useState([])
-    const [recommendations, setRecomendation] = useState([])
+    const [recommendations, setRecomendation] = useState({})
+    const [expandedReviews, setExpandedReviews] = useState({});
 
 
     const{
@@ -48,6 +48,7 @@ export function AnimeItem(){
       console.log(data.data)
     }
 
+
     useEffect(()=>{
         getAnime(id)
         getCharacters(id)
@@ -76,13 +77,11 @@ export function AnimeItem(){
               </div>
             </div>
             <p className="description">
-             {showMore ? synopsis : synopsis?.substring(0,450)+'...'}
-             <button onClick={()=>{
-             setShowAllp(!showAllp);
-             }}>
-                {showAll ? 'ver menos' : 'Leia mais'}
-             </button>
-            </p>
+          {showMore ? synopsis : (synopsis && synopsis.length > 450 ? synopsis.substring(0, 450) + '...' : synopsis)}
+          <button onClick={() => setShowmore(!showMore)}>
+            {showMore ? 'ver menos' : 'Leia mais'}
+          </button>
+        </p>
          </div>
          <h3 className="title">
            trailer
@@ -102,7 +101,7 @@ export function AnimeItem(){
            Personagens
          </h3>
          <div className="characters">
-         {characters?.slice(0, showAll ? undefined : 10).map((character, index) => {
+         {characters?.slice(0, showAllp ? undefined : 10).map((character, index) => {
   const { role } = character;
   const { images, name, mal_id } = character.character;
 
@@ -118,13 +117,13 @@ export function AnimeItem(){
 })}
       
       </div>      
-      {!showAll && (
-        <button onClick={() => setShowAll(true)} className="Button-display">Mostrar Todos</button>
+      {!showAllp && (
+        <button onClick={() => setShowAllp(true)} className="Button-display">Mostrar Todos os Personagens</button>
       )}  
-      {showAll && (
-        <button onClick={() => setShowAll(false)}className="Button-display">Mostrar Apenas 10</button>
+      {showAllp && (
+        <button onClick={() => setShowAllp(false)}className="Button-display">Mostrar Apenas 10</button>
       )} 
-     {revio.map((revios,index) => {
+     {revio?.map((revios,index) => {
       
       const {review} = revios;
       const {username, images}= revios.user
@@ -143,12 +142,20 @@ export function AnimeItem(){
         </div>
 
         <p>
-        {showMore ? review : review?.substring(0,450)+'...'}
-             <button onClick={()=>{
-             setShowmore(!showMore);
-             }}>
-                {showMore ? 'ver menos' : 'Leia mais'}
-             </button>
+          {expandedReviews[index]
+            ? review
+            : review?.substring(0, 450) + "..."}
+
+          <button
+            onClick={() => {
+              setExpandedReviews((prev) => ({
+                ...prev,
+                [index]: !prev[index],
+              }));
+            }}
+          >
+            {expandedReviews[index] ? "ver menos" : "Leia mais"}
+          </button>
         </p>
         </div>
 
@@ -285,6 +292,7 @@ const AnimeItemStyled = styled.div`
        border-radius: 10px;
        height: 35px;
        border-style: none;
+       color: white;
     }
     .review{
       background-color: #fff;
