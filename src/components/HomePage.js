@@ -1,14 +1,15 @@
 import { useState } from "react"
 import {Popular} from '../components/popular'
 import { useGlobalContext } from "../context/global"
-import styled from "styled-components"
 import { Upcoming } from "./upComing"
 import { Airing } from "./Airing"
+import { HomepageStyled } from "../styles/homePageStyle"
+import { Bar } from "./Bar"
 
 export function HomePage(){
 
    const {handleSubmit, search, 
-         searchAnime, handleChange,
+          handleChange,
          getPopularAnime, getupcomingAnime,
          getAiringAnime,
          } =useGlobalContext()
@@ -32,6 +33,7 @@ export function HomePage(){
     return(
         <HomepageStyled>
             <header>
+                <Bar/>
                 <div className="logo">
                     <h1>
                         {rendered === 'popular' ? 'Animes Populares' : 
@@ -72,70 +74,3 @@ export function HomePage(){
     )
 }
 
-const HomepageStyled = styled.div`
-
-  background-color: #EDEDED;
-  header{
-    padding: 2rem 5rem;
-    width: 60%;
-    margin: 0 auto;
-    transition: all .4s ease-in-out;
-    .logo{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 2rem;
-
-    }        
-    .search-Container{
-           display: flex;
-           align-items: center;
-           justify-content: center;
-           gap: 1rem;
-
-           button{
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: .7rem 1.5rem;
-            outline: none;
-            border-radius: 30px;
-            font-size: 1.2rem;
-            background-color: #fff;
-            cursor: pointer;
-            transition: all .4s ease-in-in;
-            font-family: inherit;
-            border: 5px solid #e5e7eb;
-           }
-
-           form{
-            position: relative;
-            width: 100%;
-            .input-control{
-                position: relative;
-                transition: all .4s ease-in-;
-            }
-            .input-control input{
-                 width: 400px;
-                 height: 50px;
-                 padding: 0%.7ren 1rem;
-                 border: none;
-                 outline: none;
-                 border-radius: 30px;
-                 font-size: 1.2rem;
-                 background-color: #fff;
-                 border: 5px solid #e5e7eb;
-                 transition: all .4s ease-in-out;
-            }
-            .input-control button{
-              position: absolute;
-              right: 0;
-              top: 50%;
-              transform:translateY(-50%);
-            }
-
-           }
-        }
-  }
-
-`

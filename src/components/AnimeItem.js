@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
-import styled from "styled-components"
+
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { AnimeItemStyled } from "../styles/animeItemStyle";
 
 export function AnimeItem(){
 
@@ -11,8 +15,9 @@ export function AnimeItem(){
     const [showMore, setShowmore] = useState(false)
     const [showAllp, setShowAllp] = useState(false);
     const [revio, setReview] = useState([])
-    const [recommendations, setRecomendation] = useState({})
+    const [recomendations, setRecomendation] = useState([])
     const [expandedReviews, setExpandedReviews] = useState({});
+
 
 
     const{
@@ -20,7 +25,7 @@ export function AnimeItem(){
         trailer, aired, duration, 
         season, rank,  score, 
         socored_by, popularity, status, 
-        rating, source,}= anime
+        rating, source,}= anime 
 
     const getAnime = async (anime)=>{
         const response = await fetch(`https://api.jikan.moe/v4/anime/${id}`)
@@ -42,23 +47,40 @@ export function AnimeItem(){
       console.log("review",data.data)
     }
 
-    const getRecomendation = async (anime)=>{
-      const response = await fetch(`https://api.jikan.moe/v4/recommendations/anime`)
-      const data = await response.json()
-      console.log(data.data)
-    }
+     const getRecomendation = async (anime)=>{
+       const response = await fetch(`https://api.jikan.moe/v4/recommendations/anime`)
+       const data = await response.json()
+       setRecomendation(data.data)
+       console.log("recomendation",data.data)
+     }
+     const handleReloadAndScrollTop = () => {
 
+  
+  
+
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth', 
+      });
+    };
+
+     const settings = {
+      infinite: true,
+      speed: 500,
+      slidesToShow: 5,
+      slidesToScroll: 1,
+    };
 
     useEffect(()=>{
-        getAnime(id)
-        getCharacters(id)
-        getReview(id)
+        getAnime()
+        getCharacters()
+        getReview()
         getRecomendation()
-    },[])
+    },[id])
 
     return(
        <AnimeItemStyled>
-         <h1>{title}</h1>
+         <h1>{anime?.title}</h1>
          <div className="details">
             <div className="detail">
               <div className="image">
@@ -123,6 +145,24 @@ export function AnimeItem(){
       {showAllp && (
         <button onClick={() => setShowAllp(false)}className="Button-display">Mostrar Apenas 10</button>
       )} 
+      <h3 className="title">Dicas de animes </h3>
+    <Slider {...settings} className="slider">
+
+      {recomendations?.map((recomendation, idx) =>{
+      const mal_id = recomendation.entry[0].mal_id
+      const images = recomendation.entry[0].images
+
+      return(
+        <Link to={`/anime/${mal_id}`} key={idx} onClick={handleReloadAndScrollTop}>
+
+      <img src={images?.jpg.image_url}  alt={`Recomendação ${idx}`}  className="img-carro"/>
+         </Link>
+        
+      )
+
+     })}  
+    </Slider>
+
      {revio?.map((revios,index) => {
       
       const {review} = revios;
@@ -170,178 +210,3 @@ export function AnimeItem(){
     )
 }
 
-const AnimeItemStyled = styled.div`
-
-    padding: 3rem 18rem;
-    background-color: #EDEDED;
-
-    h1{
-       display: inline-block;
-       font-size: 3rem;
-       margin-bottom: 1.5rem;
-       background: linear-gradient(to right, #a855f7, #27AE60);
-       -webkit-background-clip: text;
-       -webkit-text-fill-color: transparent;
-       transition: all .4s ease-in-out;
-       &:hover{
-        transform: skew(-3deg);
-       }
-    }
-    .title{
-      display: inline-block;
-       font-size: 3rem 0;
-       margin-bottom: 2rem;
-       background: linear-gradient(to right, #a855f7, #27AE60);
-       -webkit-background-clip: text;
-       -webkit-text-fill-color: transparent;
-    }
-
-    .description{
-      margin-top: 2rem;
-      color: #6c7983;
-      line-height: 1.7rem;
-      button{
-        background-color: transparent;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        font-size: 1.2rem;
-        color: #27AE60;
-        font-weight: 600;
-      }
-    }
-
-    .details{
-      background-color: #fff;
-      border-radius: 20px;
-      padding: 2rem;
-      border: 5px solid #e5e7eb;
-      min-width: 500px;
-      .detail{
-        display: grid;
-        img{
-            border-radius: 7px;
-            float: left;
-        }      
-        .anime-details{
-        padding-left: 60px;
-        height: 500px;
-        width: 600px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        p{
-          display: flex;
-          gap: 1rem;
-        }
-        p h3:first-child{
-          font-weight: 600;
-          color: black;
-        }
-      }
-      }
-
-    }
-
-    .trailer-con{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      iframe{
-        outline: none;
-        border: 5px solid #e5e7eb;
-        padding: 1.5rem;
-        border-radius: 10px;
-        background-color: #FFFFFF;
-      }
-    }
-    .characters{
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      grid-gap: 2rem;
-      background-color: #fff;
-      border-radius: 20px;
-      border: 5px solid #e5e7eb;
-      text-align: center;
-      padding-bottom: 20px;
-      .character{
-        margin-top: 10px;
-        margin-left: 10px;
-        margin-right: 10px;
-         padding: .4rem .6rem;
-         border-radius: 7px;
-         background-color: #EDEDED;
-         transition: all .4a ease-in-out;
-         img{
-            width: 200px;
-            border-radius: 7px;
-         }
-         h4{
-          padding: .5rem 0;
-          color: #454e56;
-         }
-         p{
-          color: #27AE60;
-         }
-      }
-    }
-    .Button-display{
-      margin-top: 10px;
-       width: 100%;
-       background-color: #6c7983;
-       border-radius: 10px;
-       height: 35px;
-       border-style: none;
-       color: white;
-    }
-    .review{
-      background-color: #fff;
-      margin-bottom: 20px;
-      margin-top: 20px;
-      border-radius: 7px;
-      border: 5px solid #e5e7eb;
-      .only-review{
-        border-radius: 10px;
-        padding: 20px 20px 20px 20px;
-
-        .user{ 
-          display: flex;
-          margin-bottom: 20px;
-          img{
-          width: 200px;
-          height: 200px;
-          float: left;
-          border: 2px solid black;
-        }
-        h2{
-          text-align: left;
-          margin-top: 40px;
-          margin-left: 20px;
-          color: black;
-        }
-        h3{
-          color: black;
-          margin-top: 150px;
-          margin-left: 130px;
-          span{
-            color: red;
-          }
-        }
-        }
-       p{
-        text-align: left;
-        button{
-        background-color: transparent;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        font-size: 1.2rem;
-        color: #27AE60;
-        font-weight: 600;
-      }
-       }
-       
-        
-      }
-    }
-`
