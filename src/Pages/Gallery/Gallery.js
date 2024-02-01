@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom"
-import { useGlobalContext } from "../context/global"
+import { useGlobalContext } from "../../context/global"
 import { useEffect, useState } from "react"
-import { GalleryStyled } from "../styles/galleryStyle"
+import { GalleryStyled } from "../../styles/galleryStyle"
 
 export function Gallery(){
     

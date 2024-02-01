@@ -15,18 +15,29 @@ export const PopularStyled = styled.div`
     width: 100%;
     grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 2rem;
-      a{
+
+      .div-animes{
         height: 500px;
         border-radius: 7px;
-        border: 5px solid #e5e7eb;
+        border: 5px solid #e5e7eb;      
 
-
-        img{        
+      img{        
         width: 100%;
         height: 100%;
         object-fit:cover;
         border-radius: 5px;
         }
+      }
+      .addButton{
+        position: absolute;
+
+transform: translate(-50%, -50%);
+padding: 10px;
+background-color: #120D31;
+border: none;
+border-Radius: 5px;
+cursor: pointer;
+color: white;
       }
     }
 

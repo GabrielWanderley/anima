@@ -101,6 +101,18 @@ export  const GlobalContextProvider = ({children})=>{
          dispatch({type:GET_PICTURES, payload: data.data})
     
    }
+   const [globalState, setGlobalState] = useState({
+    userName:"",
+    userEmail:"",
+    userPicture:"",
+  });
+
+  const updateGlobalContext = (newData) => {
+    setGlobalState((prevData) => ({
+      ...prevData,
+      ...newData
+    }));
+  };
 
     useEffect(()=>{
       getPopularAnime()
@@ -117,7 +129,7 @@ export  const GlobalContextProvider = ({children})=>{
             getupcomingAnime,
             getAiringAnime,
             getAnimePictures,
-            
+            globalState, updateGlobalContext
             
         }}>
              {children}

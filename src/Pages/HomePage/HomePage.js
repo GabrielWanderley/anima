@@ -1,10 +1,9 @@
 import { useState } from "react"
-import {Popular} from '../components/popular'
-import { useGlobalContext } from "../context/global"
-import { Upcoming } from "./upComing"
-import { Airing } from "./Airing"
-import { HomepageStyled } from "../styles/homePageStyle"
-import { Bar } from "./Bar"
+import {Popular} from '../../components/popular'
+import { useGlobalContext } from "../../context/global"
+import { Upcoming } from "../../components/upComing"
+import { Airing } from "../../components/Airing"
+import { HomepageStyled } from "../../styles/homePageStyle"
 
 export function HomePage(){
 
@@ -33,7 +32,6 @@ export function HomePage(){
     return(
         <HomepageStyled>
             <header>
-                <Bar/>
                 <div className="logo">
                     <h1>
                         {rendered === 'popular' ? 'Animes Populares' : 

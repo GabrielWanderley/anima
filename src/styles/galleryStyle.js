@@ -10,7 +10,7 @@ export const GalleryStyled = styled.div`
    align-items: center;
    .back{
     position: absolute;
-    top: 2rem;;
+    top: 12rem;
     left: 2rem;
     a{
         font-weight: 600;

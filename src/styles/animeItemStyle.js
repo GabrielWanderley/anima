@@ -5,6 +5,18 @@ export const AnimeItemStyled = styled.div`
     padding: 3rem 18rem;
     background-color: #120D31;
 
+    .addButton{
+        position: absolute;
+
+transform: translate(-50%, -50%);
+padding: 10px;
+background-color: #120D31;
+border: none;
+border-Radius: 5px;
+cursor: pointer;
+color: white;
+      }
+
     h1{
        display: inline-block;
        font-size: 3rem;
@@ -183,5 +195,118 @@ export const AnimeItemStyled = styled.div`
       height: 350px;
     }
   }
+
+  .inputs{
+     background-color: #fff;
+     border-radius: 7px;
+      border: 5px solid #302F4D;
+      text-align: center;
+      padding-bottom: 15px;
+      
+      h2{
+        margin-top: 15px;
+        margin-bottom: 15px;
+      }
+
+      textarea{
+        max-width: 700px;
+        max-height: 200px;
+        min-width: 700px;
+        min-height: 200px;
+      }
+
+      select{
+         background-color: #120D31;
+         color: #fff;
+         width: 90px;
+         height: 40px;
+         border-radius: 7px;
+        margin-right: 15px;
+        margin-top: 15px;
+      }
+
+      button {
+  border-radius: .25rem;
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: 400;
+  padding-left: 25px;
+  padding-right: 25px;
+  color: #fff;
+  -webkit-clip-path: polygon(0 0,0 0,100% 0,100% 0,100% calc(100% - 15px),calc(100% - 15px) 100%,15px 100%,0 100%);
+  clip-path: polygon(0 0,0 0,100% 0,100% 0,100% calc(100% - 15px),calc(100% - 15px) 100%,15px 100%,0 100%);
+  height: 40px;
+  font-size: 0.7rem;
+  line-height: 14px;
+  letter-spacing: 1.2px;
+  transition: .2s .1s;
+  background-image: linear-gradient(90deg,#1c1c1c,#6220fb);
+  border: 0 solid;
+  overflow: hidden;
+}
+
+button:hover {
+  cursor: pointer;
+  transition: all .3s ease-in;
+  padding-right: 30px;
+  padding-left: 30px;
+}
+  }
+
+
+  .btn-div{
+
+   text-align: end;
+   margin-right: 15px;
+   margin-bottom: 15px;
+
+      .btn {
+  background-color: transparent;
+  position: relative;
+  border: none;
+  cursor: pointer;
+}
+
+.btn::after {
+  content: 'delete';
+  position: absolute;
+  top: -130%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: fit-content;
+  height: fit-content;
+  background-color: #120D31;
+  padding: 4px 8px;
+  border-radius: 5px;
+  transition: .2s linear;
+  transition-delay: .2s;
+  color: white;
+  text-transform: uppercase;
+  font-size: 12px;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.icon {
+  transform: scale(1.2);
+  transition: .2s linear;
+}
+
+.btn:hover > .icon {
+  transform: scale(1.5);
+}
+
+.btn:hover > .icon path {
+  fill: #120D31;
+}
+
+.btn:hover::after {
+  visibility: visible;
+  opacity: 1;
+  top: -160%;
+}
+  }
+
+
 
 `
