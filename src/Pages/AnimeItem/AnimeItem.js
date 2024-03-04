@@ -9,6 +9,9 @@ import { db } from "../../firebase/firebase";
 import { addDoc, collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { useGlobalContext } from "../../context/global";
 
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export function AnimeItem(){
 
     const  {id} = useParams()
@@ -84,9 +87,8 @@ export function AnimeItem(){
     const handleEnviar = async () => {
       try {
         if(globalState.userEmail){
-          
           if (!userReview.trim()) {
-            alert("O campo de revisão não pode estar vazio.");
+            toast.error("O campo de revisão não pode estar vazio.");
             return;
           }        const docRef = await addDoc(collection(db, 'posts'), {
           review: userReview, // Alterei de `review` para `userReview`
@@ -103,7 +105,7 @@ export function AnimeItem(){
         setUserReview('');
         setContemSpoiler(false);
         }else{
-          alert("faça login para poder comentar")
+          toast.error("faça login para poder comentar")
         }
 
       } catch (error) {
@@ -127,7 +129,7 @@ export function AnimeItem(){
       try {
         // Verificar se o animeId está na lista de IDs dos animes já adicionados
         if (addDados.some(item => item.id === id)) {
-          alert("Anime já adicionado");
+          toast.warning("Anime já adicionado");
         } else if (globalState.userEmail) {
           const docRef = await addDoc(collection(db, 'animes'), {
             userId: globalState.userEmail,
@@ -137,10 +139,10 @@ export function AnimeItem(){
           // Atualiza o estado local com os novos dados
           setDadosAdd([...addDados, { id: docRef.id, userId: globalState.userEmail, id: id }]);
     
-          alert("Anime adicionado com sucesso");
+          toast.success("Anime adicionado com sucesso");
           console.log('Documento adicionado com ID:', docRef.id);
         } else {
-          alert("Faça login para poder adicionar");
+          toast.error("Faça login para poder adicionar");
         }
       } catch (error) {
         console.error('Erro ao adicionar documento:', error);
@@ -389,6 +391,7 @@ export function AnimeItem(){
       )
      })}
 
+     <ToastContainer />
 
        </AnimeItemStyled>
 

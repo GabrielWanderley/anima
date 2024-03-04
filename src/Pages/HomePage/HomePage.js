@@ -7,11 +7,15 @@ import { HomepageStyled } from "../../styles/homePageStyle"
 
 export function HomePage(){
 
-   const {handleSubmit, search, 
+   
+        const {
+          handleSubmit,
+          search,
           handleChange,
-         getPopularAnime, getupcomingAnime,
-         getAiringAnime,
-         } =useGlobalContext()
+          getPopularAnime,
+          getupcomingAnime,
+          getAiringAnime,
+        } = useGlobalContext();
 
    const [rendered, setRendered]= useState('popular')
 
@@ -48,11 +52,16 @@ export function HomePage(){
                         }}>Populares<i className="fas fa-fire"></i></button>
                     </div>
                     <form action="" className="search-form" onSubmit={handleSubmit}>
-                        <div className="input-control">
-                            <input type="text" placeholder="Procure seu anime" value={search} onChange={handleChange} />
-                            <button type="submit" >Procurar</button>
-                        </div>
-                    </form>
+          <div className="input-control">
+            <input
+              type="text"
+              placeholder="Procure seu anime"
+              value={search}
+              onChange={handleChange}
+            />
+            <button type="submit">Procurar</button>
+          </div>
+        </form>
                     <div className="filter-btn airing-filter">
                         <button onClick={()=>{
                             setRendered('airing')

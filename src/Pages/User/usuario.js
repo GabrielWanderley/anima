@@ -5,6 +5,9 @@ import { db } from "../../firebase/firebase";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { useGlobalContext } from "../../context/global";
 
+import { Backdrop, CircularProgress } from '@mui/material';
+
+
 export function Usuario() {
 
     const { globalState } = useGlobalContext()
@@ -15,7 +18,20 @@ export function Usuario() {
     const [anime, setAnime] = useState([])
     const [userAnime, setUserAnime] = useState([])
     const [expandedReviews, setExpandedReviews] = useState({});
+    const [conteudoCarregado, setConteudoCarregado] = useState(false);
 
+    useEffect(() => {
+      const carregarConteudoAssincrono = async () => {
+        // Simula um carregamento assíncrono (pode ser uma chamada de API, etc.)
+        await new Promise(resolve => setTimeout(resolve, 1000));
+  
+        // Marca o conteúdo como carregado
+        setConteudoCarregado(true);
+      };
+  
+      carregarConteudoAssincrono();
+    }, []);
+  
 
 
     const getAnime = async () => {
@@ -110,6 +126,11 @@ export function Usuario() {
 
     return (
         <UserStyled>
+
+<Backdrop open={!conteudoCarregado} style={{ zIndex: 1, color: '#fff' }}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
+      {conteudoCarregado && (
             <div className="UserBox">
                 <img src={usuarioEncontrado?.userPicture} />
                 <h2>{usuarioEncontrado && usuarioEncontrado.userName}</h2>
@@ -154,6 +175,7 @@ export function Usuario() {
                     ))}
                 </div>
             </div>
+        )}
 
         </UserStyled>
     );

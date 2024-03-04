@@ -3,6 +3,7 @@ import styled from "styled-components"
 
 export const GalleryStyled = styled.div`
 
+
    background-color: #120D31;
    min-height: 100vh;
    display: flex;

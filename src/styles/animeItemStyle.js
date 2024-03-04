@@ -115,6 +115,7 @@ color: white;
          transition: all .4a ease-in-out;
          img{
             width: 200px;
+            height: 310px;
             border-radius: 7px;
          }
          h4{
@@ -213,6 +214,10 @@ color: white;
         max-height: 200px;
         min-width: 700px;
         min-height: 200px;
+        font-size: 17px;
+        padding-left: 10px;
+        padding-top: 10px;
+
       }
 
       select{

@@ -16,6 +16,10 @@ body{
     font-size: 1.2rem;
 }
 
+input[type="text"] {
+   padding-left: 20px;
+}
+
 `
 
 export default GlobalStyle

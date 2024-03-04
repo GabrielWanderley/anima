@@ -6,6 +6,8 @@ import { useEffect, useState } from "react"
 import { db } from "../firebase/firebase"
 import { addDoc, collection, getDocs } from "firebase/firestore"
 
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export function Popular({ rendered }) {
@@ -18,7 +20,7 @@ export function Popular({ rendered }) {
     try {
         // Verificar se o animeId está na lista de IDs dos animes já adicionados
         if (dados.some(item => item.id === animeId)) {
-            alert("Anime já adicionado");
+          toast.warning("Anime já adicionado");
         } else if (globalState.userEmail) {
             const docRef = await addDoc(collection(db, 'animes'), {
                 userId: globalState.userEmail,
@@ -28,10 +30,10 @@ export function Popular({ rendered }) {
             // Atualiza o estado local com os novos dados
             setDados([...dados, { id: docRef.id, userId: globalState.userEmail, id: animeId }]);
 
-            alert("Anime adicionado com sucesso");
+            toast.success("Anime adicionado com sucesso");
             console.log('Documento adicionado com ID:', docRef.id);
         } else {
-            alert("Faça login para poder adicionar");
+          toast.error("Faça login para poder adicionar");
         }
     } catch (error) {
         console.error('Erro ao adicionar documento:', error);
@@ -83,6 +85,7 @@ export function Popular({ rendered }) {
         {conditinalRender()}
       </div>
       <SideBar />
+      <ToastContainer/>
     </PopularStyled>
   )
 }
