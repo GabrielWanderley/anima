@@ -91,4 +91,11 @@ export const UserStyled= styled.div `
          }
     }
 
+    
+@media (min-width: 768px) and (max-width:1023px){
+  padding: 1rem 3rem;}
+  
+  @media (max-width:767px){
+  padding: 1rem 1rem;
+  }
 `

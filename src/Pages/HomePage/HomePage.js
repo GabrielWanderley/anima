@@ -45,7 +45,7 @@ export function HomePage(){
                     </h1>
                 </div>
                 <div className="search-Container">
-                    <div className="filter-btn opular-filter">
+                    <div className="filter-btn opular-filter slas">
                         <button onClick={()=>{
                             setRendered('popular')
                             getPopularAnime()

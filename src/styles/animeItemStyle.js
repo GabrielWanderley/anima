@@ -314,14 +314,154 @@ button:hover {
 
  @media (min-width: 1032px) and (max-width:1280px){
 
+  padding: 1rem 3rem;
+  
+  .characters{
+      .character{
+         img{
+            width: 170px;
+            height: 380px;
+            border-radius: 7px;
+         }
+      }
+    }
+
+
 }
 
 @media (min-width: 768px) and (max-width:1023px){
+  padding: 1rem 3rem;
+  
+  .details{
 
+      .detail{
+        img{
+            width: 300px;
+            height: 450px;
+        }      
+        .anime-details{
+        height: 500px;
+        width: 280px;
+
+        p{
+
+          font-size: 16px;
+        }
+      }
+      }
+
+    }
+  .characters{
+      .character{
+         img{
+            width: 220px;
+            height: 380px;
+            border-radius: 7px;
+         }
+      }
+    }
+    .slider{
+    margin-bottom: 50px;
+
+        .img-carro{
+      width: 125px;
+      height: 225px;
+      
+    }
+  }
+  .inputs{
+
+      textarea{
+        max-width: 600px;
+        max-height: 200px;
+        min-width: 600px;
+      }
+    }
+    .review{
+      .only-review{
+        .user{ 
+        h3{
+          margin-left: 225px;
+        }
+        }
+      }
+    }
 }
 
 @media (max-width:767px){
+  padding: 1rem 1rem;
   
+  .details{
+    min-width: 300px;
+    max-width: 400px;
+
+      .detail{
+        img{
+            width: 290px;
+            height: 440px;
+        }      
+        .anime-details{
+          padding-top: 20px;
+          padding-left: 10px;
+        height: 500px;
+        width: 280px;
+
+        p{
+
+          font-size: 16px;
+        }
+      }
+      }
+
+    }
+  .characters{
+      .character{
+         img{
+            width: 220px;
+            height: 380px;
+            border-radius: 7px;
+         }
+      }
+    }
+    .slider{
+    margin-bottom: 50px;
+
+        .img-carro{
+      width: 70px;
+      height: 170px;
+      
+    }
+  }
+  .inputs{
+
+      textarea{
+        max-width: 300px;
+        min-width: 300px;
+      }
+    }
+    .review{
+      .only-review{
+        .user{ 
+
+margin: 0 auto;
+
+img{
+          width: 200px;
+          height: 200px;
+          border: 2px solid black;
+          float: none;
+        }
+        h2{
+          text-align: center;
+              float: left;
+        }
+        h3{
+        margin-left: 0px;
+        margin-top: 150px;
+        }
+        }
+      }
+    }
 }
 
 `

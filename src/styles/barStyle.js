@@ -118,5 +118,23 @@ export const BarStyle = styled.div`
 }
 
  }
+ @media (max-width:767px){
+  .user{
+    justify-content: end;
+    text-align: end;
+    align-items: end;
+    color: white;
+    img{
+        float: right;
+        margin-right: 30px;
+        border-radius: 10px;
+        border: 2px solid black;
+    }
+    h1{
+        font-size: 20px;
+        margin-right: 30px;
+    }
+  }
 
+  }
 `

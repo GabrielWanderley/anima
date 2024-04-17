@@ -28,4 +28,10 @@ export const SidebarStyled = styled.div`
             }
         }
     }
+
+    @media (max-width:767px){
+        padding-left: 0rem;
+        margin-left: -80px;
+
+    }
 `;
